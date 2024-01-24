@@ -11,9 +11,13 @@ import (
 	"github.com/fatih/color"
 )
 
+// --------------------------------------------------------------------------------------
+
 type PrettyHandlerOptions struct {
 	SlogOpts *slog.HandlerOptions
 }
+
+// --------------------------------------------------------------------------------------
 
 type PrettyHandler struct {
 	opts PrettyHandlerOptions
@@ -21,6 +25,8 @@ type PrettyHandler struct {
 	l     *stdLog.Logger
 	attrs []slog.Attr
 }
+
+// --------------------------------------------------------------------------------------
 
 func (opts PrettyHandlerOptions) NewPrettyHandler(
 	out io.Writer,
@@ -32,6 +38,8 @@ func (opts PrettyHandlerOptions) NewPrettyHandler(
 
 	return h
 }
+
+// --------------------------------------------------------------------------------------
 
 func (h *PrettyHandler) Handle(_ context.Context, r slog.Record) error {
 	level := r.Level.String() + ":"
@@ -82,6 +90,8 @@ func (h *PrettyHandler) Handle(_ context.Context, r slog.Record) error {
 	return nil
 }
 
+// --------------------------------------------------------------------------------------
+
 func (h *PrettyHandler) WithAttrs(attrs []slog.Attr) slog.Handler {
 	return &PrettyHandler{
 		Handler: h.Handler,
@@ -89,6 +99,8 @@ func (h *PrettyHandler) WithAttrs(attrs []slog.Attr) slog.Handler {
 		attrs:   attrs,
 	}
 }
+
+// --------------------------------------------------------------------------------------
 
 func (h *PrettyHandler) WithGroup(name string) slog.Handler {
 	// TODO: implement

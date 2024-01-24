@@ -6,6 +6,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// --------------------------------------------------------------------------------------
+
 func TestNewRandomString(t *testing.T) {
 	tests := []struct {
 		name string

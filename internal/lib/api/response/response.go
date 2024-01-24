@@ -7,25 +7,52 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
-// Описываем часть возвращаемого ответа для всех хэндлеров  (json объект)
+// --------------------------------------------------------------------------------------
+
+// Response - Описание части структуры возвращаемого ответа для всех обработчиков (json объект).
 type Response struct {
 	Status string `json:"status"` // { Error | Ok }
-	// omitempty установлено		- если значение отсутствует, то в итоговом json объекте параметр не пишем
-	// omitempty не установлено	- если значение отсутствует, то в итоговом json объекте параметр пишем, но с пустым значением
+	// omitempty установлено - если значение отсутствует, то в итоговом json объекте параметр не пишем
+	// omitempty не установлено - если значение отсутствует, то в итоговом json объекте параметр пишем, но с пустым значением
 	Error string `json:"error,omitempty"`
 }
+
+// --------------------------------------------------------------------------------------
 
 const (
 	StatusOK    = "OK"
 	StatusError = "Error"
 )
 
+// --------------------------------------------------------------------------------------
+
+// OK - Возвращает часть структуры ответа Response (JSON объект) с параметром "Status: StatusOK".
+//
+// Принимает: None.
+//
+// Возвращает: Response (JSON объект)
+//
+//	{
+//	   Status: StatusOK,
+//	}
 func OK() Response {
 	return Response{
 		Status: StatusOK,
 	}
 }
 
+// --------------------------------------------------------------------------------------
+
+// Error - Возвращает часть структуры ответа Response (JSON объект) с параметрами "Status: StatusError" и "Error: msg".
+//
+// Принимает: msg (string) - сообщение об ошибке.
+//
+// Возвращает: Response (JSON объект)
+//
+//	{
+//	   Status: StatusError,
+//	   Error: msg,
+//	}
 func Error(msg string) Response {
 	return Response{
 		Status: StatusError,
@@ -33,15 +60,24 @@ func Error(msg string) Response {
 	}
 }
 
-// ValidationError - Генерация ответа для ошибок валидации.
-// На вход принимает список ошибок валидатора.
-// Возвращает структуру Response.
+// --------------------------------------------------------------------------------------
+
+// ValidationError - функция генерации структуры ответа Response для отправки ошибок валидации.
+//
+// Принимает: errs (validator.ValidationErrors) - список ошибок валидатора.
+//
+// Возвращает: часть структуры ответа Response со списком ошибок валидации (JSON объект).
+//
+//	{
+//	   Status: StatusError,
+//	   Error:  strings.Join(errMsgs, ", "),
+//	}
 func ValidationError(errs validator.ValidationErrors) Response {
 
-	// Собираем сообщения об ошибках валидации
+	// Ошибки валидации будем собирать в массив строк errMsgs.
 	var errMsgs []string
 
-	// Перебираем ошибки валидации и формируем ответ клиенту
+	// Перебираем список ошибок валидации errs и формируем ответ клиенту
 	for _, err := range errs {
 
 		// Проверяем ошибку по тэгу
@@ -55,7 +91,7 @@ func ValidationError(errs validator.ValidationErrors) Response {
 		}
 	}
 
-	// Возвращаем ответ RESPONSE клиенту
+	// Возвращаем ответа Response клиенту (JSON объект)
 	return Response{
 		Status: StatusError,
 		Error:  strings.Join(errMsgs, ", "),

@@ -17,6 +17,11 @@ import (
 	"url-shortener/internal/lib/logger/handlers/slogdiscard"
 )
 
+// --------------------------------------------------------------------------------------
+
+// TestSaveHandler - функция тестирования для обработчика SaveHandler.
+//
+// Тестирует различные сценарии сохранения URL и alias.
 func TestSaveHandler(t *testing.T) {
 	cases := []struct {
 		name      string
@@ -51,7 +56,7 @@ func TestSaveHandler(t *testing.T) {
 			name:      "SaveURL Error",
 			alias:     "test_alias",
 			url:       "https://google.com",
-			respError: "failed to add url",
+			respError: "failed to save url",
 			mockError: errors.New("unexpected error"),
 		},
 	}

@@ -1,3 +1,4 @@
 {
-    "sqltools.useNodeRuntime": true
+	"sqltools.useNodeRuntime": true,
+	"cSpell.language": "en,ru-RU,ru"
 }
