@@ -1,0 +1,8 @@
+env: "local" # local, dev, prod
+#env: "dev" # local, dev, prod
+#env: "prod" # local, dev, prod
+storage_path: "./storage/storage.db" # sqlite case
+http_server:
+  address: "localhost:8082"
+  timeout: 4s
+  idle_timeout: 60s
