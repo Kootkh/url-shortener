@@ -1,0 +1,12 @@
+{
+	"configurations": [
+		{
+			"name": "url-shortener",
+			"type": "go",
+			"request": "launch",
+			"mode": "auto",
+			"program": "${workspaceFolder}/cmd/url-shortener/main.go",
+			"envFile": "${workspaceFolder}/local.env"
+		}
+	]
+}

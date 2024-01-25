@@ -1,10 +1,14 @@
 package main
 
+// Запускать командой:
+// CONFIG_PATH=./config/local.yaml go run ./cmd/url-shortener/main.go
+
 import (
 	"log/slog"
 	"net/http"
 	"os"
 	"url-shortener/internal/config"
+	"url-shortener/internal/http-server/handlers/redirect"
 	"url-shortener/internal/http-server/handlers/url/save"
 	mwLogger "url-shortener/internal/http-server/middleware/logger"
 	"url-shortener/internal/lib/logger/handlers/slogpretty"
@@ -32,7 +36,9 @@ const (
 // Возвращает: None.
 func main() {
 
+	// ------------------------
 	// INIT CONFIG
+	// ------------------------
 	// DONE: init config: cleanenv
 	cfg := config.MustLoad()
 
@@ -42,16 +48,25 @@ func main() {
 	*	// !!![DEBUG] DELETE AFTER DEBUG COMPLETE
 	**/
 
+	// ------------------------
 	// LOGGER
+	// ------------------------
 	// DONE: init logger: "slog"
 	// TODO: change to "Zerolog"
 	log := setupLogger(cfg.Env)
 
-	log.Info("Starting url-shortener service...", slog.String("env", cfg.Env))
+	log.Info(
+		"Starting url-shortener service...",
+		slog.String("env", cfg.Env),
+		// slog.String("version", cfg.Version),
+		slog.String("version", "123"),
+	)
 	log.Debug("Debug messages are enabled")
 	// log.Error("Error messages are enabled")
 
+	// ------------------------
 	// STORAGE
+	// ------------------------
 	// DONE: init storage: "sqlite"
 	// TODO: change to Postgres
 	storage, err := sqlite.New(cfg.StoragePath)
@@ -62,10 +77,12 @@ func main() {
 		os.Exit(1)
 	}
 
+	// ------------------------
 	// ROUTER
+	// ------------------------
 	// DONE: init router: chi
 	// TODO: "chi render"
-	// TODO: change to "Fasthhtp / mux / gin"
+	// TODO: change to "Fasthttp / mux / gin"
 	router := chi.NewRouter()
 
 	// Подключаем к роутеру middleware
@@ -76,8 +93,19 @@ func main() {
 	router.Use(middleware.Recoverer)
 	router.Use(middleware.URLFormat)
 
-	router.Post("/url", save.New(log, storage))
-	//router.Get("/{alias}", redirect.New(log, storage))
+	router.Route("/url", func(r chi.Router) {
+
+		r.Use(middleware.BasicAuth("url-shortener", map[string]string{
+
+			cfg.HTTPServer.User: cfg.HTTPServer.Password,
+		}))
+
+		r.Post("/", save.New(log, storage))
+		// TODO: r.Delete("/url/{alias}", redirect.New(log, storage))
+
+	})
+
+	router.Get("/{alias}", redirect.New(log, storage))
 
 	log.Info("Starting server...", slog.String("address", cfg.Address))
 
@@ -89,7 +117,9 @@ func main() {
 		IdleTimeout:  cfg.HTTPServer.IdleTimeout,
 	}
 
+	// ------------------------
 	// RUN SERVER
+	// ------------------------
 	if err := srv.ListenAndServe(); err != nil {
 		log.Error("Failed to run server")
 	}
@@ -101,9 +131,9 @@ func main() {
 
 // setupLogger - инициализирует и возвращает логгер.
 //
-// (Вынесли в отдельную функцию, потому что установка зависить от параметра "env" окружения.)
+// (Вынесли в отдельную функцию, потому что установка зависит от параметра "env" окружения.)
 //
-// Принимает: env (string, прописаный в конфигурационном файле).
+// Принимает: env (string, прописанный в конфигурационном файле).
 //
 // Возвращает: указатель на slog.Logger.
 func setupLogger(env string) *slog.Logger {

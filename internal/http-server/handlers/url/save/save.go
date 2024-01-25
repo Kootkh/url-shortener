@@ -48,6 +48,10 @@ const aliasLength = 6 // длина алиаса при генерации
 
 // --------------------------------------------------------------------------------------
 
+// Генерация мока для URLSaver
+// go install github.com/vektra/mockery/v2@v2.40.1
+//go:generate go run github.com/vektra/mockery/v2@v2.40.1 --name=URLSaver
+
 // URLSaver - Интерфейс стораджа.
 // Описываем по месту использования.
 type URLSaver interface {
@@ -149,7 +153,7 @@ func New(log *slog.Logger, urlSaver URLSaver) http.HandlerFunc {
 			return
 		}
 
-		// Обрабатываем остальыне ошибки
+		// Обрабатываем остальные ошибки
 		if err != nil {
 
 			// Пишем ошибку (в чистом виде, без изменений) в log.Error

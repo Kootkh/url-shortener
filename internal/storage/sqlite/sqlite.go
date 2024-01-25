@@ -9,12 +9,20 @@ import (
 	"github.com/mattn/go-sqlite3" // Импортируем библиотеку для работы с SQLite
 )
 
+// --------------------------------------------------------------------------------------
+
 // Описание структуры объекта Storage
 type Storage struct {
 	db *sql.DB
 }
 
-// Функция-конструктор, которая соберёт и вернёт объект Storage для базы
+// --------------------------------------------------------------------------------------
+
+// New - Функция-конструктор, которая соберёт и вернёт объект Storage для базы
+//
+// Принимает: storagePath - "путь к базе данных" (string)
+//
+// Возвращает: *Storage - указатель на объект Storage и error - ошибку (nil - если ошибки нет)
 func New(storagePath string) (*Storage, error) {
 
 	const operation = "storage.sqlite.New"
@@ -53,7 +61,13 @@ func New(storagePath string) (*Storage, error) {
 	return &Storage{db: db}, nil
 }
 
-// Метод сохранения URL
+// --------------------------------------------------------------------------------------
+
+// SaveURL - функция-метод сохранения URL в базу по указателю *Storage
+//
+// Принимает: urlToSave - URL для сохранения (string) и alias - алиас для URL (string)
+//
+// Возвращает: int64 - ID сохраненного URL и error - ошибку (nil - если ошибки нет)
 func (s *Storage) SaveURL(urlToSave string, alias string) (int64, error) {
 
 	const operation = "storage.sqlite.SaveURL"
@@ -98,7 +112,13 @@ func (s *Storage) SaveURL(urlToSave string, alias string) (int64, error) {
 	return id, nil
 }
 
-// Метод получения URL
+// --------------------------------------------------------------------------------------
+
+// GetURL - функция-метод получения URL из базы по указателю *Storage
+//
+// Принимает: alias - алиас для URL (string)
+//
+// Возвращает: сохраненный URL (string) и error - ошибку (nil - если ошибки нет)
 func (s *Storage) GetURL(alias string) (string, error) {
 	const operation = "storage.sqlite.GetURL"
 
@@ -133,7 +153,13 @@ func (s *Storage) GetURL(alias string) (string, error) {
 	return resURL, nil
 }
 
-// Метод удаления URL
+// --------------------------------------------------------------------------------------
+
+// SaveURL - функция-метод удаления URL из базы по указателю *Storage по принятому alias-у
+//
+// Принимает: alias - алиас для URL (string)
+//
+// Возвращает: error - ошибку (nil - если ошибки нет)
 func (s *Storage) DeleteURL(alias string) error {
 
 	const operation = "storage.sqlite.DeleteURL"

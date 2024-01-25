@@ -28,9 +28,13 @@ type PrettyHandler struct {
 
 // --------------------------------------------------------------------------------------
 
-func (opts PrettyHandlerOptions) NewPrettyHandler(
-	out io.Writer,
-) *PrettyHandler {
+// NewPrettyHandler - Создаёт и инициализирует новый экземпляр обработчика PrettyHandler с заданным output writer.
+//
+// Принимает:
+// It takes an io.Writer as input and returns a *PrettyHandler.
+func (opts PrettyHandlerOptions) NewPrettyHandler(out io.Writer) *PrettyHandler {
+
+	// Создаем обработчик
 	h := &PrettyHandler{
 		Handler: slog.NewJSONHandler(out, opts.SlogOpts),
 		l:       stdLog.New(out, "", 0),
@@ -41,9 +45,17 @@ func (opts PrettyHandlerOptions) NewPrettyHandler(
 
 // --------------------------------------------------------------------------------------
 
+// Handle - обрабатывает record записи обработчика логов slog и выводит их в улучшенном формате.
+//
+// Принимает: _ context.Context - контекст логирования, r как slog.Record - запись лога
+//
+// Возвращает: error (или nil в случае успеха)
 func (h *PrettyHandler) Handle(_ context.Context, r slog.Record) error {
+
+	// Назначаем константе уровень входящей записи
 	level := r.Level.String() + ":"
 
+	// Определяем цвет в зависимости от уровня записи
 	switch r.Level {
 	case slog.LevelDebug:
 		level = color.MagentaString(level)
@@ -55,14 +67,17 @@ func (h *PrettyHandler) Handle(_ context.Context, r slog.Record) error {
 		level = color.RedString(level)
 	}
 
+	// Собираем параметры атрибутов
 	fields := make(map[string]interface{}, r.NumAttrs())
 
+	// Собираем атрибуты
 	r.Attrs(func(a slog.Attr) bool {
 		fields[a.Key] = a.Value.Any()
 
 		return true
 	})
 
+	// Проходим по параметрам атрибутов и заполняем из значениями
 	for _, a := range h.attrs {
 		fields[a.Key] = a.Value.Any()
 	}
