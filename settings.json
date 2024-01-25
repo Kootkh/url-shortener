@@ -1,0 +1,463 @@
+{
+	// ------------------------------------------------------------------------
+	// Main editor settings
+	// ------------------------------------------------------------------------
+	"window.openFilesInNewWindow": "off",
+	"editor.tabSize": 2,
+	"editor.wordWrap": "bounded",
+	"editor.wrappingIndent": "same",
+	"editor.wordWrapColumn": 100,
+	"editor.folding": false,
+	"editor.insertSpaces": false,
+	"editor.smoothScrolling": true,
+	"editor.minimap.enabled": false,
+	"editor.detectIndentation": true,
+	"editor.suggestSelection": "first",
+	"editor.scrollBeyondLastLine": true, // Определяет, будет ли редактор прокручиваться за пределы последней строки.
+	"editor.multiCursorModifier": "ctrlCmd",
+	"editor.renderControlCharacters": false, // Определяет, будет ли редактор отображать управляющие символы.
+	"editor.unicodeHighlight.ambiguousCharacters": false, // Управляет выделением символов, которые можно спутать с основными символами ASCII, кроме тех, которые являются общими для текущего пользовательского языкового стандарта.
+	"editor.quickSuggestionsDelay": 0,
+
+	// ------------------------------------------------------------------------
+	// Appearance
+	// ------------------------------------------------------------------------
+	"editor.cursorBlinking": "expand",
+	"editor.bracketPairColorization.enabled": true,
+	"editor.guides.bracketPairs": true,
+	"editor.glyphMargin": false,
+	"editor.scrollbar.vertical": "hidden",
+	"editor.scrollbar.horizontal": "hidden",
+	// ----------------------
+	// Theme
+	// ----------------------
+	"workbench.colorTheme": "Aura Dark",
+	"workbench.iconTheme": "helium-icon-theme",
+	"workbench.productIconTheme": "fluent-icons",
+
+	"workbench.colorCustomizations": {
+		"[Aura Dark]": {
+			// Aura theme customization
+			"editor.background": "#110f17",
+			"terminal.background": "#110f17",
+			"activityBar.background": "#110f17",
+			"statusBar.background": "#110f17",
+			"editorGroupHeader.tabsBackground": "#110f17",
+			"tab.inactiveBackground": "#110f17"
+			// "editorOverviewRuler.errorForeground": "#0000",
+			// "editorOverviewRuler.warningForeground": "#0000",
+			// "editorOverviewRuler.infoForeground": "#0000"
+		}
+	},
+	"workbench.layoutControl.enabled": false,
+
+	// ----------------------
+	// Fonts
+	// ----------------------
+
+	// Change font EDITOR
+	"editor.fontSize": 14,
+	"editor.lineHeight": 18,
+	"editor.fontLigatures": true,
+	// Change font family
+	// "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace",
+	// "editor.fontFamily": "Dark Mono, IBM Plex Mono, Geist Mono",
+	"editor.fontFamily": "Geist Mono, Dark Mono, IBM Plex Mono",
+	//"editor.fontFamily": "Victor Mono",
+	//"editor.fontFamily": "Fira Code Mono",
+	// "editor.inlayHints.fontFamily": "Geist Mono",
+	"editor.inlayHints.fontFamily": "Pragmata Pro",
+	// "notebook.output.fontFamily": "Geist Mono",
+	"notebook.output.fontFamily": "Pragmata Pro",
+	"editor.codeLensFontFamily": "Geist Mono",
+
+	"editor.tokenColorCustomizations": {
+		"textMateRules": [
+			{
+				//"name": "comment",
+				"scope": [
+					// following will be in italic
+					"comment",
+					"entity.name.type.class", // class names
+					// "keyword", // import, export, return...
+					"constant", // string, number, boolean..., this, super
+					"storage.modifier", //static keyword
+					"storage.type.class.js" // class keyword
+				],
+				"settings": {
+					// "foreground": "808080"
+					"fontStyle": "italic"
+				}
+			},
+			{
+				//"name": "comment",
+				"scope": [
+					// following will be excluded from italic (VSCode has some defaults italics)
+					"invalid",
+					"keyword.operator",
+					"keyword.other.unit.px.css",
+					"constant.numeric.css",
+					"constant.numeric.decimal.js",
+					"constant.numeric.json"
+				],
+				"settings": {
+					// "foreground": "808080"
+					"fontStyle": ""
+				}
+			}
+		]
+	},
+
+	// TERMINAL
+	"terminal.integrated.fontSize": 14,
+	"terminal.integrated.fontFamily": "Geist Mono, Pragmata Pro, Iosevka NFM, JetBrainsMono Nerd Font",
+	"terminal.integrated.tabs.enabled": false,
+
+	// EXPLORER
+	"explorer.confirmDelete": false,
+	"explorer.compactFolders": false,
+	"explorer.confirmDragAndDrop": false,
+
+	// EMMET
+	"emmet.triggerExpansionOnTab": true,
+	"emmet.showExpandedAbbreviation": "never",
+	"workbench.editor.tabSizing": "shrink",
+	"workbench.startupEditor": "newUntitledFile",
+
+	// DEBUG
+	"debug.toolBarLocation": "hidden",
+	"debug.focusWindowOnBreak": false,
+	"debug.showInlineBreakpointCandidates": false,
+	"debug.showBreakpointsInOverviewRuler": false,
+	"debug.console.fontSize": 14,
+	//"debug.console.fontFamily": "Geist Mono",
+	"debug.console.fontFamily": "JetBrainsMono Nerd Font",
+
+	// FORMAT
+	"prettier.semi": false,
+	"prettier.useTabs": true,
+	"editor.formatOnSave": true,
+	"prettier.singleQuote": true,
+	"prettier.jsxSingleQuote": true,
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": "explicit"
+	},
+	"prettier.arrowParens": "avoid", // Включение круглых скобок вокруг единственного параметра функции стрелки.
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[markdown]": {
+		"files.trimTrailingWhitespace": true,
+		"editor.defaultFormatter": "yzhang.markdown-all-in-one"
+	},
+	"files.associations": {
+		"*.scss": "postcss",
+		"*.md": "markdown",
+		"*.module.scss": "postcss"
+	},
+	"editor.inlineSuggest.enabled": true,
+	"[html]": {
+		"editor.suggest.insertMode": "replace",
+		"editor.formatOnType": true,
+		"editor.defaultFormatter": "vscode.html-language-features"
+	},
+
+	// LARAVEL
+	"emmet.includeLanguages": {
+		"blade": "html"
+	},
+	"blade.format.enable": true,
+	"files.defaultLanguage": "plaintext",
+	"liveServer.settings.donotShowInfoMsg": true,
+	"security.workspace.trust.untrustedFiles": "open",
+	"html.completion.attributeDefaultValue": "singlequotes",
+	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+	/* "[prisma]": {
+		"editor.defaultFormatter": "Prisma.prisma"
+	}, */
+
+	// BREADCRUMBS
+	"breadcrumbs.icons": false,
+	"breadcrumbs.showKeys": false,
+	"breadcrumbs.showFiles": false,
+	"breadcrumbs.filePath": "off",
+	"breadcrumbs.symbolPath": "off",
+	"breadcrumbs.showArrays": false,
+	"breadcrumbs.showEvents": false,
+	"breadcrumbs.showFields": false,
+	"breadcrumbs.showClasses": false,
+	"breadcrumbs.showMethods": false,
+	"breadcrumbs.showBooleans": false,
+	"breadcrumbs.showFunctions": false,
+	"breadcrumbs.showConstants": false,
+	"breadcrumbs.showEnumMembers": false,
+	"breadcrumbs.showConstructors": false,
+
+	// JS & TS
+	"javascript.suggestionActions.enabled": false,
+	"typescript.suggestionActions.enabled": false,
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"javascript.preferences.quoteStyle": "single",
+	"typescript.preferences.quoteStyle": "single",
+	"javascript.format.semicolons": "remove",
+	"typescript.format.semicolons": "remove",
+	"javascript.suggest.paths": false,
+	"typescript.suggest.paths": false,
+
+	// PYTHON
+	"python.languageServer": "Pylance", // Дефолтный путь для Питона
+	"python.defaultInterpreterPath": "/usr/bin/python",
+	"python.analysis.diagnosticMode": "openFilesOnly", // Выбор области, где производится анализ файлов на ошибки. Вариант "только открытые файлы" чтобы меньше тормозило
+	"python.analysis.autoImportCompletions": true, // Включает автоматическое добавление импорта модуля, если его нет, но в коде найдены на него ссылки
+	"python.analysis.typeCheckingMode": "off", // Очень полезная, но очень суровая опция - включает проверку соответствия типов для языкового движка Pylance. По сути попытка сделать из Python типизированный язык. Доступные значения:
+	//  off: анализ проверки типа не проводится; производится диагностика
+	//       неразрешенных импортов/переменных
+	//  basic: Правила, не связанные с проверкой типов (все правила в off)
+	//         + базовые правила проверки типов
+	//  strict: все правила проверки типов с наивысшей серьезностью ошибки
+	//          (включая все правила в категориях off и basic)
+	"python.analysis.inlayHints.variableTypes": true, // Анализирует ваши переменные и предлагает для них подходящие типы. Так же позволяет двойным кликом добавить тип
+	"python.analysis.inlayHints.functionReturnTypes": true, // Анализирует ваши функции и классы и предлагает подходящие типы выходных данных. Так же дает подсказки, какой выходной тип вы получите
+	"python.terminal.activateEnvironment": true, // Если в проекте найдено виртуальное окружение, то в терминале оно будет автоматически активироваться при переходе в этот проект
+	/* "python.linting.enabled": true, // Включает линтер для питона
+	"python.linting.flake8Enabled": true, // Выбор каким линтером пользоваться.  Я выбрал flake8.
+	"python.linting.flake8Args": [ // Настройки flake8. Я лично выставил себе только увеличение максимальной длинны строки - по дефолту 80
+	"--max-line-length=250",
+		// "--ignore=E402,F841,F401,E302,E305",
+	], */
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.python", // Выбор форматера
+		"editor.formatOnSave": true, // Включает форматирование при сохранении
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "explicit"
+		}
+	},
+
+	// SPELL CHECKER
+	"cSpell.language": "en,ru-RU,ru",
+	"cSpell.enabled": true,
+	"cSpell.enableFiletypes": [
+		"blade",
+		"css",
+		"html",
+		"javascript",
+		"json",
+		"markdown",
+		"php",
+		"scss",
+		"sql",
+		"typescript",
+		"yaml",
+		"go"
+	],
+
+	"editor.unicodeHighlight.allowedCharacters": {
+		"а": true,
+		"с": true,
+		"Т": true,
+		"б": true,
+		"е": true
+	},
+	"editor.hideCursorInOverviewRuler": true,
+	"git.enableSmartCommit": true,
+
+	// Toggle excluded files - список файлов, которые исключаются из показа в дереве каталогов. Отлично подходит для скрытия всяких ненужных системных каталогов
+	"files.exclude": {
+		"**/.git": true,
+		"**/__pycache__": true,
+		"**/.DS_Store": true,
+		"**/Thumbs.db": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/node_modules": true,
+		"**/.next": true,
+		"**/.husky": true,
+		"**/drizzle": true,
+		"**/dist": true,
+		"**/.todo.md": true,
+		"**/.vscode": true,
+		"**/.eslintrc.cjs": true,
+		"**/.editorconfig": true,
+		"**/.gitignore": true,
+		"**/.lintstagedrc.mjs": true,
+		"**/.markdownlint.json": true,
+		"**/.markdownlintignore": true,
+		"**/.prettierignore": true,
+		"**/bun.lockb": true,
+		"**/cspell.json": true,
+		"**/package-lock.json": true,
+		"**/pnpm-lock.yaml": true,
+		"**/next-env.d.ts": true,
+		"**/postcss.config.cjs": true,
+		"**/prettier.config.js": true,
+		"**/README.md": true,
+		"**/next.config.js": true,
+		"**/tailwind.config.ts": true,
+		"**/drizzle.config.ts": true,
+		"**/migrate.ts": true,
+		"**/.env.example": true,
+		"**/.expo": true,
+		"**/.expo-shared": true,
+		"**/.idea": true
+	},
+
+	// files.watcherExclude - за изменениями файлов из этого списка VS Code не следит
+	"files.watcherExclude": {
+		"**/.git/objects/**": true,
+		"**/.git/subtree-cache/**": true,
+		"**/node_modules/*/**": true,
+		"**/.hg/store/**": true,
+		"**/__pycache__/**": true,
+		"**/.venv-*/**": true
+	},
+
+	//"window.zoomLevel": 0,
+	/* "[blade]": {
+		"editor.defaultFormatter": "onecentlin.laravel-blade"
+	}, */
+
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+
+	/* "[php]": {
+		"editor.defaultFormatter": "kokororin.vscode-phpfmt"
+	}, */
+
+	"scm.inputFontFamily": "Geist Mono",
+	//"scm.inputFontFamily": "Victor Mono",
+	"chat.editor.fontFamily": "Geist Mono",
+	"markdown.preview.fontFamily": "Geist Mono",
+	// ------------------------------------------------------------------------
+	"workbench.settings.editor": "json", // open json editor for settings
+	"sqltools.useNodeRuntime": true,
+
+	// UI
+
+	"window.commandCenter": false,
+	//"window.titleBarStyle": "custom",
+
+	// APC
+	"apc.activityBar": {
+		"position": "bottom",
+		"hideSettings": true,
+		"size": 18
+	},
+
+	"apc.electron": {
+		"titleBarStyle": "hiddenInset",
+		"trafficLightPosition": {
+			"x": 12,
+			"y": 0
+		}
+	},
+
+	"apc.font.family": "Geist Mono",
+	"apc.monospace.font.family": "Geist Mono",
+	"apc.statusBar": {
+		"position": "editor-bottom",
+		"height": 18,
+		"fontSize": 12
+	},
+
+	// Custom CSS
+	"apc.stylesheet": {
+		".sidebar > .composite": "height: 12px !important",
+		".title-label": "display: none !important",
+		".title-actions": "display: none !important",
+		".tabs-and-actions-container > .editor-actions": "display: none !important",
+		".titlebar-center": "display: none !important",
+		".titlebar-right": "display: none !important",
+		".inline-tabs-placeholder": "display: none !important",
+		".split-view-view .visible": "background-color: #110f17 !important"
+	},
+
+	// Misc
+	"editor.linkedEditing": true,
+
+	"files.trimTrailingWhitespace": true,
+
+	"workbench.settings.applyToAllProfiles": [],
+	"protoc": {},
+	"window.menuBarVisibility": "compact",
+	"redhat.telemetry.enabled": false,
+	"yaml.schemas": {},
+	"codeium.enableConfig": {
+		"*": true,
+		"go.mod": true
+	},
+	"cSpell.userWords": [
+		"__pycache__",
+		"алиас",
+		"алиаса",
+		"анмаршаллинг",
+		"билдер",
+		"валидатора",
+		"Валидируем",
+		"десериализация",
+		"десериализовать",
+		"закэшировать",
+		"конфигов",
+		"логгер",
+		"логгера",
+		"логгеру",
+		"логирующего",
+		"маршаллинг",
+		"мока",
+		"Мокаем",
+		"редиректить",
+		"Рендерим",
+		"сериализовать",
+		"слайса",
+		"стораджа",
+		"сторадже",
+		"сфэйлится",
+		"сфэйлить",
+		"фаталом",
+		"фэйле",
+		"хэндлера",
+		"cleanenv",
+		"Clickhouse",
+		"codeium",
+		"donot",
+		"esbenp",
+		"fastapi",
+		"Fasthttp",
+		"fatih",
+		"Fira",
+		"ilyakaznacheev",
+		"Iosevka",
+		"jsonify",
+		"kokororin",
+		"LARAVEL",
+		"lintstagedrc",
+		"lockb",
+		"loguru",
+		"markdownlintignore",
+		"mattn",
+		"onecentlin",
+		"Parens",
+		"phpfmt",
+		"protoc",
+		"pydantic",
+		"Pylance",
+		"pyright",
+		"singlequotes",
+		"slogdiscard",
+		"slogpretty",
+		"sqlalchemy",
+		"sqltools",
+		"stretchr",
+		"stylesheet",
+		"titlebar",
+		"vektra",
+		"venv",
+		"vsintellicode",
+		"yzhang",
+		"Zerolog"
+	],
+	"diffEditor.ignoreTrimWhitespace": false,
+	"[go]": {
+		"editor.defaultFormatter": "golang.go"
+	},
+	"git.confirmSync": false
