@@ -155,14 +155,14 @@ func (s *Storage) GetURL(alias string) (string, error) {
 
 // --------------------------------------------------------------------------------------
 
-// SaveURL - функция-метод удаления URL из базы по указателю *Storage по принятому alias-у
+// DeleteALIAS - функция-метод удаления ALIAS из базы по указателю *Storage по принятому alias-у
 //
 // Принимает: alias - алиас для URL (string)
 //
 // Возвращает: error - ошибку (nil - если ошибки нет)
-func (s *Storage) DeleteURL(alias string) error {
+func (s *Storage) DeleteALIAS(alias string) error {
 
-	const operation = "storage.sqlite.DeleteURL"
+	const operation = "storage.sqlite.DeleteALIAS"
 
 	// Подготавливаем запрос
 	stmt, err := s.db.Prepare("DELETE FROM url WHERE alias = ?")
@@ -178,9 +178,10 @@ func (s *Storage) DeleteURL(alias string) error {
 	// Проверяем на ошибки
 	if err != nil {
 
-		// Если ничего не получили в ответ - возвращаем ошибку ErrURLNotFound
+		fmt.Println(err)
+		// Если ничего не получили в ответ - возвращаем ошибку ErrALIASNotFound
 		if errors.Is(err, sql.ErrNoRows) {
-			return storage.ErrURLNotFound
+			return storage.ErrALIASNotFound
 		}
 
 		// Если какая-то другая ошибка - просто возвращаем её

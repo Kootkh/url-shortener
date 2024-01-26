@@ -1,8 +1,5 @@
 package main
 
-// Запускать командой:
-// CONFIG_PATH=./config/local.yaml go run ./cmd/url-shortener/main.go
-
 import (
 	"log/slog"
 	"net/http"
@@ -18,6 +15,9 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/v5/middleware"
 )
+
+// Запускать командой:
+// CONFIG_PATH=./config/local.yaml go run ./cmd/url-shortener/main.go
 
 // --------------------------------------------------------------------------------------
 

@@ -15,9 +15,9 @@ import (
 
 // --------------------------------------------------------------------------------------
 
+//go:generate go run github.com/vektra/mockery/v2@v2.40.1 --name=URLGetter
+
 // URLGetter - интерфейс для получения URL по принятому alias.
-//
-//go:generate go run github.com/vektra/mockery/v2@v2.28.2 --name=URLGetter
 type URLGetter interface {
 	GetURL(alias string) (string, error)
 }
